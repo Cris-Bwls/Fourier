@@ -14,7 +14,12 @@ public:
 	FourierSeries(int nMaxEpicycles, function<WaveData(int)> seriesFunc = nullptr);
 	~FourierSeries();
 
-	inline void SetSeriesFunc(function<WaveData(int)> newFunc) { m_SeriesFunc = newFunc; };
+	inline void SetMaxEpicycles(int nMaxEpicycles) { m_nMaxEpicycles = nMaxEpicycles; ResetSeries(); };
+	inline void SetSeriesFunc(function<WaveData(int)> newFunc) { m_SeriesFunc = newFunc; ResetSeries(); };
+	inline void SetMaxWaveCount(int nMaxWaveCount) { m_nMaxWaveCount = nMaxWaveCount; };
+	inline void SetRadiusMulti(float fRadiusMulti) { m_fRadiusMultiplier = fRadiusMulti; };
+	inline void SetEpicycleCenter(Vector2 v2Pos) { m_v2EpicycleCenter = v2Pos, m_fWaveOffset = v2Pos.x * 2; };
+	inline void SetLineSize(float fLineSize) { m_fLineSize = 2.0f; };
 
 	void Update(float fDeltaTime);
 	void Draw(aie::Renderer2D* pRenderer);
@@ -23,6 +28,13 @@ public:
 
 private:
 	void DefaultSeriesFunc();
+	void StartSeries();
+	void ResetSeries();
+
+	int m_nMaxEpicycles = 0;
+	int m_nMaxWaveCount = 1000;
+	float m_fRadiusMultiplier = 50.0f;
+	float m_fLineSize = 2.0f;
 
 	function<WaveData(int)> m_SeriesFunc;
 	vector<Epicycle*> m_apEpicyles;

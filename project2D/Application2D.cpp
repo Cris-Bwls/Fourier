@@ -17,7 +17,21 @@ bool Application2D::startup() {
 	
 	m_2dRenderer = new aie::Renderer2D();
 
-	m_pFourierSeries = new FourierSeries(CIRCLE_COUNT);
+	auto SeriesFunc = [](int iter)->WaveData
+	{
+		WaveData data;
+		data.fFreq = float(iter + 1);
+		float var = -data.fFreq;
+
+		if (iter % 2)
+			var *= -1;
+
+		data.fAmp = (2.0f / (var * 3.14f));
+
+		return data;
+	};
+
+	m_pFourierSeries = new FourierSeries(CIRCLE_COUNT , SeriesFunc);
 	
 	m_cameraX = 0;
 	m_cameraY = 0;
