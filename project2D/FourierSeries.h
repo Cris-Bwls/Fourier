@@ -19,7 +19,7 @@ public:
 	inline void SetMaxWaveCount(int nMaxWaveCount) { m_nMaxWaveCount = nMaxWaveCount; };
 	inline void SetRadiusMulti(float fRadiusMulti) { m_fRadiusMultiplier = fRadiusMulti; };
 	inline void SetEpicycleCenter(Vector2 v2Pos) { m_v2EpicycleCenter = v2Pos, m_fWaveOffset = v2Pos.x * 2; };
-	inline void SetLineSize(float fLineSize) { m_fLineSize = 2.0f; };
+	inline void SetLineSize(float fLineSize) { m_fLineSize = fLineSize; };
 
 	void Update(float fDeltaTime);
 	void Draw(aie::Renderer2D* pRenderer);

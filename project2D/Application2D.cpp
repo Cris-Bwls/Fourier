@@ -32,6 +32,9 @@ bool Application2D::startup() {
 	};
 
 	m_pFourierSeries = new FourierSeries(CIRCLE_COUNT , SeriesFunc);
+	m_pFourierSeries->m_bIsActive = false;
+
+	m_pFourierDrawing = new FourierDrawing();
 	
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -42,6 +45,7 @@ bool Application2D::startup() {
 
 void Application2D::shutdown() {
 	
+	delete m_pFourierDrawing;
 	delete m_pFourierSeries;
 	delete m_2dRenderer;
 }
@@ -51,6 +55,7 @@ void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
 
 	m_pFourierSeries->Update(deltaTime);
+	m_pFourierDrawing->Update(deltaTime);
 
 	// input example
 	aie::Input* input = aie::Input::getInstance();
@@ -85,6 +90,7 @@ void Application2D::draw() {
 	m_2dRenderer->begin();
 
 	m_pFourierSeries->Draw(m_2dRenderer);
+	m_pFourierDrawing->Draw(m_2dRenderer);
 
 	// done drawing sprites
 	m_2dRenderer->end();

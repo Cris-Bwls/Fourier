@@ -60,6 +60,9 @@ void FourierSeries::ResetSeries()
 
 void FourierSeries::Update(float fDeltaTime)
 {
+	if (!m_bIsActive)
+		return;
+
 	fTime += fDeltaTime;
 
 	Vector2 v2Pos = m_v2EpicycleCenter;
@@ -80,6 +83,9 @@ void FourierSeries::Update(float fDeltaTime)
 
 void FourierSeries::Draw(aie::Renderer2D * pRenderer)
 {
+	if (!m_bIsActive)
+		return;
+
 	Vector2 prevPos = m_v2EpicycleCenter;
 	for (int i = 0; i < m_apEpicyles.size(); ++i)
 	{
